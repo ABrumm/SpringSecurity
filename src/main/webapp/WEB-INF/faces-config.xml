@@ -10,8 +10,8 @@
 		<managed-bean-class>com.brumma.common.InitialBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
-			<property-name></property-name>
-			<value></value>
+			<property-name>contactService</property-name>
+			<value>#{contactDAOImpl}</value>
 		</managed-property>
 	</managed-bean>
 </faces-config>
