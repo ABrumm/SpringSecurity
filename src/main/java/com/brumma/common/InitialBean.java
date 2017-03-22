@@ -21,12 +21,12 @@ public class InitialBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Contact user;
 	private ArrayList<Contact> userList;
-	private ContactDAO m_contactDAO;
+	private ContactDAO m_contactService;
 
 	@PostConstruct
 	public void initMethod() {
 		this.user = new Contact();
-		setUserList(m_contactDAO.getuserList());
+		setUserList(m_contactService.getuserList());
 	}
 
 	public void resetUser() {
@@ -34,14 +34,14 @@ public class InitialBean implements Serializable {
 	}
 
 	public void saveNewUser() {
-		if (m_contactDAO.saveUser(this.user)) {
+		if (m_contactService.saveUser(this.user)) {
 			this.userList.add(this.user);
 		}
 	}
 
 	public void deleteUser(Contact p_contact) {
 		this.userList.remove(p_contact);
-		m_contactDAO.deleteUser(p_contact);
+		m_contactService.deleteUser(p_contact);
 	}
 
 	public void updateUser(Contact p_contact) {
@@ -52,7 +52,7 @@ public class InitialBean implements Serializable {
 			}
 			i++;
 		}
-		if (m_contactDAO.updateUser(p_contact)) {
+		if (m_contactService.updateUser(p_contact)) {
 			this.userList.set(i, p_contact);
 		}
 	}
@@ -70,7 +70,7 @@ public class InitialBean implements Serializable {
 			e.printStackTrace();
 		}
 		for (Contact i_user : l_users.getUsers()) {
-			if (m_contactDAO.saveUser(i_user)) {
+			if (m_contactService.saveUser(i_user)) {
 				this.userList.add(i_user);
 			}
 		}
@@ -92,7 +92,7 @@ public class InitialBean implements Serializable {
 		this.userList = userList;
 	}
 
-	public void setContactDAO(ContactDAO m_contactDAO) {
-		this.m_contactDAO = m_contactDAO;
+	public void setContactService(ContactDAO p_contactService) {
+		this.m_contactService = p_contactService;
 	}
 }
