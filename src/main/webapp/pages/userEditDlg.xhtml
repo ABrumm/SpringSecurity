@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:form id="editUserForm">
+	<p:dialog id="editDlg" modal="true" widgetVar="editUserDlg" resizable="false"
+		closeOnEscape="true" draggable="false">
+		<p:ajax event="close" action="#{initialBean.resetUser()}" oncomplete="console.log('Closed')"/>
+		<p:panel id="newEditUserPanel" style="border: 0px;">
+			<p:messages id="userMessages" />
+			<h:panelGrid columns="2" cellpadding="5" >
+				<h:outputLabel for="first_name" value="Vorname: " />
+				<p:inputText id="first_name" required="true" 
+					requiredMessage="Bitte geben Sie Ihren Vornamen an:"
+					value="#{initialBean.user.firstname}" />
+
+				<h:outputLabel for="last_name" value="Nachname: " requiredMessage="Bitte geben Sie Ihren Nachnamen an:"/>
+				<p:inputText id="last_name" required="true"
+					value="#{initialBean.user.lastname}" />
+
+				<h:outputLabel for="email" value="Email: "/>
+				<p:inputText id="email" value="#{initialBean.user.email}" required="true" 
+					validatorMessage="Ihre Email entspricht nicht dem erforderlichen Kriterien."
+					requiredMessage="Bitte geben Sie Ihre Emailadresse an:">
+						<f:validateRegex pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"/>
+				</p:inputText>
+
+				<h:outputLabel for="adress" value="Adresse:  " />
+				<p:inputText id="adress"
+					value="#{initialBean.user.adress}" />
+
+				<h:outputLabel for="phone" value="Telefon: " />
+				<p:inputText id="phone" value="#{initialBean.user.phone}" validatorMessage="Ihre Telefonnummer entspricht nicht dem erforderlichen Kriterien.">
+					<f:validateRegex pattern="^[0-9\+]{1,}[0-9\-]{3,15}$"/>
+				</p:inputText>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:commandButton value="Bearbeiten" process="editUserForm" update="newEditUserPanel"
+			action="#{initialBean.updateUser(initialBean.user)}" oncomplete="if(args &amp;&amp; !args.validationFailed) PF('editUserDlg').hide(); PF('contactDataTable').filter()" style="float: right;" />
+
+	</p:dialog>
+</h:form>
+
+</html>

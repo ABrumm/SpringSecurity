@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>JSF 2.0 Hello World</title>
+	<link rel="stylesheet" href="styles/main.css" />
+</h:head>
+<h:body>
+
+	<h:form id="mainForm" nctype="multipart/form-data">
+		
+		<p:dataTable var="user" value="#{initialBean.userList}" rows="10"
+			style="margin: 30px;" paginator="true" paginatorPosition="bottom"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {addUser} {upload}"
+			rowsPerPageTemplate="5,10,15" sortMode="multiple" reflow="true"
+			widgetVar="contactDataTable">
+
+			<f:facet name="{addUser}">
+				<div class="addUser">
+					<p:commandLink actionListener="#{initialBean.resetUser()}"
+						update="addUserForm" oncomplete="PF('addUserDlg').show()">
+						<p:graphicImage styleClass="addUser_icon"
+							value="/images/iconAdd.png" />
+					</p:commandLink>
+				</div>
+			</f:facet>
+
+			<f:facet name="{upload}">
+				 <p:fileUpload value="#{fileUploadView.file}"
+				 		fileUploadListener="#{initialBean.handleFileUpload}"
+				 		dragDropSupport="true"
+				 		invalidFileMessage="Sie dürfen nur XML Files hochladen."
+				 		allowTypes="/(\.|\/)(xml)$/"
+				 		skinSimple="true" multiple="false"
+				 		style="margin-top: 5px;" update="mainForm" oncomplete="PF('contactDataTable').filter()">
+				 </p:fileUpload>
+				 	
+			</f:facet>
+
+			<p:column headerText="Vorname" filterBy="#{user.firstname}"
+				filterMatchMode="contains" sortBy="#{user.firstname}">
+				<h:outputText value="#{user.firstname}" />
+			</p:column>
+
+			<p:column headerText="Nachname" filterBy="#{user.lastname}"
+				filterMatchMode="contains" sortBy="#{user.lastname}">
+				<h:outputText value="#{user.lastname}" />
+			</p:column>
+
+			<p:column headerText="Email" sortBy="#{user.email}">
+				<h:outputLink value="mailto:#{user.email}">
+					<h:outputText value="#{user.email}" />
+				</h:outputLink>
+			</p:column>
+
+			<p:column headerText="Adresse" sortBy="#{user.adress}">
+				<h:outputText value="#{user.adress}" />
+			</p:column>
+
+			<p:column headerText="phone" sortBy="#{user.phone}">
+				<h:outputLink value="tel:#{user.phone}">
+					<h:outputText value="#{user.phone}" />
+				</h:outputLink>
+			</p:column>
+
+			<p:column width="40">
+				<p:commandLink action="#{initialBean.setUser(user)}"
+					update="@form editUserForm" oncomplete="PF('editUserDlg').show();">
+					<p:graphicImage
+						value="/images/edit.png"
+						style="display: block; height: 25px; margin: 0 auto;" />
+				</p:commandLink>
+			</p:column>
+
+			<p:column width="40">
+				<p:commandLink action="#{initialBean.deleteUser(user)}"
+					update="@form" oncomplete="PF('contactDataTable').filter()">
+					<p:graphicImage styleClass="addUser_icon"
+						value="/images/delete.png"
+						style="display: block; height: 30px; margin: 0 auto;" />
+				</p:commandLink>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+	<ui:include src="/pages/userAddDlg.xhtml" />
+	<ui:include src="/pages/userEditDlg.xhtml" />
+</h:body>
+</html>

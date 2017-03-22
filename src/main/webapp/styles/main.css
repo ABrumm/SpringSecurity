@@ -1,0 +1,17 @@
+a, td, span, input {
+	font-size: 14px;
+}
+
+.addUser {
+	display: inline-block;
+    height: 30px;
+    float: right;
+}
+
+.addUser_icon {
+	height:	100%;
+}
+
+.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
+	color: white;	
+}
