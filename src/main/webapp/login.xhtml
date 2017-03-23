@@ -13,20 +13,29 @@
 </h:head>
 <h:body>
 
-	<h:form id="loginForm">
+	<div class="languageSelect">
+		<h:graphicImage id="selectGerman" value="images/german.png"/>
+		<p:tooltip for="selectGerman" value="#{msg.languageGerman}" />
+		<h:graphicImage id="selectEnglish" value="images/english.png"/>
+		<p:tooltip for="selectEnglish" value="#{msg.languageEnglish}"/>
+	</div>
+
+	<h:form id="loginForm" styleClass="loginForm">
+
 		<div>
-			<h:outputLabel for="username" value="Username:"/>
-			<h:inputText id="username"/>
+			<h:outputLabel for="username" value="#{msg.loginUser}: " />
+			<h:inputText id="username" />
 		</div>
-		
+
 		<div>
-			<h:outputLabel for="password" value="Password: "/>
-			<h:inputText id="password"/>
+			<h:outputLabel for="password" value="#{msg.loginPassword}: " />
+			<h:inputText id="password" />
 		</div>
-		
+
 		<div>
-			<p:commandButton action="#{loginManager.doLogin()}" value="Login"/>
+			<p:commandButton action="#{loginManager.doLogin()}" value="Login" />
 		</div>
 	</h:form>
+	
 </h:body>
 </html>

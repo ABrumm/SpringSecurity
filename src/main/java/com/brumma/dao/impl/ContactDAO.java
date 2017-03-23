@@ -3,17 +3,12 @@ package com.brumma.dao.impl;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import javax.faces.bean.ViewScoped;
-
-import org.springframework.stereotype.Service;
-
-import com.brumma.dao.ContactDAO;
+import com.brumma.dao.ContactDaoI;
 import com.brumma.model.Contact;
 import com.brumma.util.HibernateUtil;
 
-@Service
-@ViewScoped
-public class ContactDAOImpl implements ContactDAO{
+
+public class ContactDAO implements ContactDaoI{
 
 	public ArrayList<Contact> getuserList()
 	  {
