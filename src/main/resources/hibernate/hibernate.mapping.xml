@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.brumma.dao.Contact" table="contactdata">
+    <class name="com.brumma.model.Contact" table="contactdata">
         <id name="contact_id" type="java.lang.Integer">
             <column name="contact_id" unique="true"/>
             <generator class="increment" />

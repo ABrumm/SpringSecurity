@@ -14,4 +14,10 @@
 			<value>#{contactDAOImpl}</value>
 		</managed-property>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>loginManager</managed-bean-name>
+		<managed-bean-class>com.brumma.security.LoginManager</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 </faces-config>

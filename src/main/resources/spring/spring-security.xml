@@ -9,11 +9,11 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<bean id="authenticationProvider" class="com.brumma.security.AuthenticationProvider" />
+	<bean id="authenticationDemoProvider" class="com.brumma.security.AuthenticationDemoProvider" />
 
 	<security:authentication-manager>
 		<security:authentication-provider
-			ref="authenticationProvider" />
+			ref="authenticationDemoProvider" />
 	</security:authentication-manager>
 
 	<security:http use-expressions="true">
@@ -22,7 +22,7 @@
 		<security:intercept-url pattern="login.xhtml"
 			access="permitAll" />
 
-		<security:form-login login-page="login.xhtml"
+		<security:form-login login-page="/login.xhtml"
 			login-processing-url="/security_check" username-parameter="username"
 			password-parameter="password" />
 	</security:http>
