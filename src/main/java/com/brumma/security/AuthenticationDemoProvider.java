@@ -8,8 +8,9 @@ import org.springframework.security.core.AuthenticationException;
 public class AuthenticationDemoProvider implements AuthenticationProvider {
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// TODO Auto-generated method stub
+	public Authentication authenticate(Authentication p_authentication) throws AuthenticationException {
+		String l_username = p_authentication.getPrincipal().toString();
+		String p_password = p_authentication.getCredentials().toString();
 		return null;
 	}
 

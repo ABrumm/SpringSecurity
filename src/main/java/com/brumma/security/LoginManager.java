@@ -13,7 +13,7 @@ public class LoginManager {
 
 	public String doLogin() {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("security_check");
+		RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("j_spring_security_check");
 		try {
 			dispatcher.forward((ServletRequest) context.getRequest(), (ServletResponse) context.getResponse());
 		} catch (ServletException | IOException e) {

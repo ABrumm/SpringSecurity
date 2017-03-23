@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -23,20 +24,28 @@ import com.brumma.model.Contacts;
 
 public class InitialBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String currentLocale = Locale.GERMAN.toString();
+	private Locale currentLocale;
 	private Contact user;
 	private ArrayList<Contact> userList;
 	private ContactDaoI contactService;
-	private static Iterator<Locale> availableLocales;
+	private static Iterator<Locale> availableLocalesIT;
+	private static Map<String, Locale> availableLocalesMap = new LinkedHashMap<String, Locale>();
 	
 	static {
-		availableLocales = FacesContext.getCurrentInstance().getApplication().getSupportedLocales();
+		availableLocalesIT = FacesContext.getCurrentInstance().getApplication().getSupportedLocales();
+		
+		while(availableLocalesIT.hasNext()){
+			Locale localeIt = availableLocalesIT.next();
+			availableLocalesMap.put(localeIt.toString(),localeIt);
+		}		
 	}
 	
 	@PostConstruct
 	public void initMethod() {
+		currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		this.user = new Contact();
 		setUserList(contactService.getuserList());
+		
 	}
 
 	public void resetUser() {
@@ -106,11 +115,20 @@ public class InitialBean implements Serializable {
 		this.contactService = p_contactService;
 	}
 
-	public String getCurrentLocale() {
+	public Locale getCurrentLocale() {
 		return currentLocale;
 	}
 
-	public void setCurrentLocale(String currentLocale) {
-		this.currentLocale = currentLocale;
+	public void setCurrentLocale(String p_currentLocale) {
+		Locale l_locale = getAvailableLocalesMap().get(p_currentLocale);
+		
+		if( l_locale != null) {
+			this.currentLocale = l_locale;	
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(l_locale);
+		}
+	}
+
+	public Map<String, Locale> getAvailableLocalesMap() {
+		return availableLocalesMap;
 	}
 }

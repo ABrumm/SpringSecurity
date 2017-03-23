@@ -13,29 +13,35 @@
 </h:head>
 <h:body>
 
-	<div class="languageSelect">
-		<h:graphicImage id="selectGerman" value="images/german.png"/>
-		<p:tooltip for="selectGerman" value="#{msg.languageGerman}" />
-		<h:graphicImage id="selectEnglish" value="images/english.png"/>
-		<p:tooltip for="selectEnglish" value="#{msg.languageEnglish}"/>
-	</div>
 
-	<h:form id="loginForm" styleClass="loginForm">
 
+	<h:form id="loginForm" prependId="false" styleClass="loginForm">
+		<div class="languageSelect">
+			<p:commandLink action="#{initialBean.setCurrentLocale('de')}" update="@form">
+				<h:graphicImage id="selectGerman" value="images/german.png"/>
+			</p:commandLink>
+			<p:tooltip for="selectGerman" value="#{msg.languageGerman}" />
+			
+			<p:commandLink action="#{initialBean.setCurrentLocale('en')}" update="@form">
+				<h:graphicImage id="selectEnglish" value="images/english.png" />
+			</p:commandLink>
+			<p:tooltip for="selectEnglish" value="#{msg.languageEnglish}" />
+		</div>
+		
 		<div>
 			<h:outputLabel for="username" value="#{msg.loginUser}: " />
-			<h:inputText id="username" />
+			<h:inputText id="username" required="true"/>
 		</div>
 
 		<div>
 			<h:outputLabel for="password" value="#{msg.loginPassword}: " />
-			<h:inputText id="password" />
+			<h:inputText id="password" required="true"/>
 		</div>
 
 		<div>
-			<p:commandButton action="#{loginManager.doLogin()}" value="Login" />
+			<p:commandButton action="#{loginManager.doLogin()}" value="#{msg.loginBtn}" />
 		</div>
 	</h:form>
-	
+
 </h:body>
 </html>

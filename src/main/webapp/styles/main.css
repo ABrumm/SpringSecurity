@@ -17,8 +17,8 @@ a, td, span, input {
 }
 
 .languageSelect {
+	margin-bottom: 40px;
 }
 
 .loginForm {
-	margin-top: 40px;
 }
