@@ -6,9 +6,10 @@
     <session-factory>
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/demo</property>
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/demo</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.default_schema">demo</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <mapping resource="/hibernate/hibernate.mapping.xml"></mapping>
