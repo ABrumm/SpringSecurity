@@ -12,7 +12,7 @@ public interface UserDaoI {
 	 * 
 	 * @return
 	 */
-	public ArrayList<User> getuserList();
+	public ArrayList<User> getPrincipal(String p_principal, String p_credential);
 
 	/**
 	 * TODO: generate description
@@ -20,14 +20,14 @@ public interface UserDaoI {
 	 * @param userName
 	 * @return
 	 */
-	public void authenticatePrincipial(String userName);
+	public void authenticatePrincipal(String userName);
 
 	/**
 	 * TODO: generate description
 	 * 
 	 * @return
 	 */
-	public Boolean isPrincipialUnlocked();
+	public Boolean isPrincipalUnlocked();
 
 	/**
 	 * TODO: generate description
@@ -35,14 +35,14 @@ public interface UserDaoI {
 	 * @param p_contact
 	 * @return
 	 */
-	public boolean savePrincipial(Contact p_contact);
+	public boolean savePrincipal(Contact p_contact);
 
 	/**
 	 * TODO: generate description
 	 * 
 	 * @param p_contact
 	 */
-	public void deletePrincipial(Contact p_contact);
+	public void deletePrincipal(Contact p_contact);
 
 	/**
 	 * TODO: generate description
@@ -50,7 +50,7 @@ public interface UserDaoI {
 	 * @param p_contact
 	 * @return
 	 */
-	public boolean updatePrincipial(Contact p_contact);
+	public boolean updatePrincipal(Contact p_contact);
 
 	/**
 	 * TODO: generate description

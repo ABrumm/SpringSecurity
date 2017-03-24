@@ -9,7 +9,9 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<bean id="authenticationDemoProvider" class="com.brumma.security.AuthenticationDemoProvider" />
+	<bean id="authenticationDemoProvider" class="com.brumma.security.AuthenticationDemoProvider">
+		<property name="userService" ref="userService"/>
+	</bean>
 
 	<security:authentication-manager>
 		<security:authentication-provider

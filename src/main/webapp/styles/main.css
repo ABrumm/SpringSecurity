@@ -20,5 +20,13 @@ a, td, span, input {
 	margin-bottom: 40px;
 }
 
-.loginForm {
+.loginlabel {
+}
+
+.loginInput{
+	
+}
+
+.loginBtn {
+	margin-top: 20px;
 }

@@ -16,7 +16,9 @@
 
 
 	<bean id="hibernateUtil" class="com.brumma.util.HibernateUtil" scope="singleton"/>
-	
+		
 	<bean id="contactService" class="com.brumma.dao.impl.ContactDao"/>
+	
+	<bean id="userService" class="com.brumma.dao.impl.UserDao"/>
 		 
 </beans>
