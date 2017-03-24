@@ -27,6 +27,24 @@
         <property name="adress" type="string">
             <column name="adress" length="50" not-null="false"/>
         </property>
-        
+    </class>
+    
+    <class name="com.brumma.model.User" table="userdata">
+    	<id name="userId" type="java.lang.Integer">
+            <column name="userId" unique="true"/>
+            <generator class="increment" />
+        </id>
+    	<property name="userName" type="string">
+    		<column name="userName" length="50" not-null="true"/>
+    	</property>
+    	<property name="userMail" type="string">
+    		<column name="userMail" length="50" not-null="true"/>
+    	</property>
+    	<property name="userPassword" type="string">
+    		<column name="userPassword" length="50" not-null="true"/>
+    	</property>
+    	<property name="userActive" type="string">
+    		<column name="userActive" length="50" not-null="true"/>
+    	</property>
     </class>
 </hibernate-mapping>

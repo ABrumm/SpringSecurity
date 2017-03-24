@@ -8,7 +8,7 @@ import com.brumma.model.Contact;
 import com.brumma.util.HibernateUtil;
 
 
-public class ContactDAO implements ContactDaoI{
+public class ContactDao implements ContactDaoI{
 
 	public ArrayList<Contact> getuserList()
 	  {
