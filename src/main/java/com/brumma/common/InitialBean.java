@@ -4,8 +4,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -13,20 +18,34 @@ import javax.xml.bind.Unmarshaller;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import com.brumma.dao.ContactDAO;
+import com.brumma.dao.ContactDaoI;
 import com.brumma.model.Contact;
 import com.brumma.model.Contacts;
 
 public class InitialBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private Locale currentLocale;
 	private Contact user;
 	private ArrayList<Contact> userList;
-	private ContactDAO m_contactService;
-
+	private ContactDaoI contactService;
+	private static Iterator<Locale> availableLocalesIT;
+	private static Map<String, Locale> availableLocalesMap = new LinkedHashMap<String, Locale>();
+	
+	static {
+		availableLocalesIT = FacesContext.getCurrentInstance().getApplication().getSupportedLocales();
+		
+		while(availableLocalesIT.hasNext()){
+			Locale localeIt = availableLocalesIT.next();
+			availableLocalesMap.put(localeIt.toString(),localeIt);
+		}		
+	}
+	
 	@PostConstruct
 	public void initMethod() {
+		currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		this.user = new Contact();
-		setUserList(m_contactService.getuserList());
+		setUserList(contactService.getuserList());
+		
 	}
 
 	public void resetUser() {
@@ -34,14 +53,14 @@ public class InitialBean implements Serializable {
 	}
 
 	public void saveNewUser() {
-		if (m_contactService.saveUser(this.user)) {
+		if (contactService.saveUser(this.user)) {
 			this.userList.add(this.user);
 		}
 	}
 
 	public void deleteUser(Contact p_contact) {
 		this.userList.remove(p_contact);
-		m_contactService.deleteUser(p_contact);
+		contactService.deleteUser(p_contact);
 	}
 
 	public void updateUser(Contact p_contact) {
@@ -52,7 +71,7 @@ public class InitialBean implements Serializable {
 			}
 			i++;
 		}
-		if (m_contactService.updateUser(p_contact)) {
+		if (contactService.updateUser(p_contact)) {
 			this.userList.set(i, p_contact);
 		}
 	}
@@ -70,7 +89,7 @@ public class InitialBean implements Serializable {
 			e.printStackTrace();
 		}
 		for (Contact i_user : l_users.getUsers()) {
-			if (m_contactService.saveUser(i_user)) {
+			if (contactService.saveUser(i_user)) {
 				this.userList.add(i_user);
 			}
 		}
@@ -92,7 +111,24 @@ public class InitialBean implements Serializable {
 		this.userList = userList;
 	}
 
-	public void setContactService(ContactDAO p_contactService) {
-		this.m_contactService = p_contactService;
+	public void setContactService(ContactDaoI p_contactService) {
+		this.contactService = p_contactService;
+	}
+
+	public Locale getCurrentLocale() {
+		return currentLocale;
+	}
+
+	public void setCurrentLocale(String p_currentLocale) {
+		Locale l_locale = getAvailableLocalesMap().get(p_currentLocale);
+		
+		if( l_locale != null) {
+			this.currentLocale = l_locale;	
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(l_locale);
+		}
+	}
+
+	public Map<String, Locale> getAvailableLocalesMap() {
+		return availableLocalesMap;
 	}
 }

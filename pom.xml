@@ -6,6 +6,15 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo Maven</name>
+	
+	<developers>
+		<developer>
+			<name>Artur Brumm</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
 
 	<properties>
 		<jsf.faces>2.2.13</jsf.faces>

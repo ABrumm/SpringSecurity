@@ -8,25 +8,40 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>JSF 2.0 Hello World</title>
+	<title>Login Page</title>
 	<link rel="stylesheet" href="styles/main.css" />
 </h:head>
 <h:body>
 
-	<h:form id="loginForm">
-		<div>
-			<h:outputLabel for="username" value="Username:"/>
-			<h:inputText id="username"/>
+
+
+	<h:form id="loginForm" prependId="false" styleClass="loginForm">
+		<div class="languageSelect">
+			<p:commandLink action="#{initialBean.setCurrentLocale('de')}" update="@form">
+				<h:graphicImage id="selectGerman" value="images/german.png"/>
+			</p:commandLink>
+			<p:tooltip for="selectGerman" value="#{msg.languageGerman}" />
+			
+			<p:commandLink action="#{initialBean.setCurrentLocale('en')}" update="@form">
+				<h:graphicImage id="selectEnglish" value="images/english.png" />
+			</p:commandLink>
+			<p:tooltip for="selectEnglish" value="#{msg.languageEnglish}" />
 		</div>
 		
 		<div>
-			<h:outputLabel for="password" value="Password: "/>
-			<h:inputText id="password"/>
+			<h:outputLabel for="username" value="#{msg.loginUser}: " />
+			<p:inputText id="username" required="true"/>
 		</div>
-		
+
 		<div>
-			<p:commandButton action="#{loginManager.doLogin()}" value="Login"/>
+			<h:outputLabel for="password" value="#{msg.loginPassword}: " />
+			<p:password id="password" required="true" />
+		</div>
+
+		<div>
+			<p:commandButton action="#{loginManager.doLogin()}" value="#{msg.loginBtn}" />
 		</div>
 	</h:form>
+
 </h:body>
 </html>

@@ -15,3 +15,10 @@ a, td, span, input {
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
 	color: white;	
 }
+
+.languageSelect {
+	margin-bottom: 40px;
+}
+
+.loginForm {
+}

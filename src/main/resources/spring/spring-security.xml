@@ -22,9 +22,12 @@
 		<security:intercept-url pattern="login.xhtml"
 			access="permitAll" />
 
+		<security:intercept-url pattern="index.xhtml"
+			access="isAuthenticated()" />
+
 		<security:form-login login-page="/login.xhtml"
-			login-processing-url="/security_check" username-parameter="username"
-			password-parameter="password" />
+			username-parameter="username" password-parameter="password" 
+			login-processing-url="/j_spring_security_check"/>
 	</security:http>
-	
+
 </beans>
