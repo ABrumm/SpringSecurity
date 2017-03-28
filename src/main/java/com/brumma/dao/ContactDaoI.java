@@ -1,6 +1,7 @@
 package com.brumma.dao;
 
 import java.util.ArrayList;
+
 import com.brumma.model.Contact;
 
 public interface ContactDaoI {

@@ -18,14 +18,14 @@
 			ref="authenticationDemoProvider" />
 	</security:authentication-manager>
 
-	<security:http use-expressions="true">
+	<security:http auto-config="true" use-expressions="true">
 		<security:csrf disabled="true" />
 
-		<security:intercept-url pattern="login.xhtml"
-			access="permitAll" />
-
 		<security:intercept-url pattern="index.xhtml"
-			access="isAuthenticated()" />
+			access="isAuthenticated() and isFullyAuthenticated()" />
+
+		<security:intercept-url pattern="login.xhtml"
+			access="!isAuthenticated()" />
 
 		<security:form-login login-page="/login.xhtml"
 			username-parameter="username" password-parameter="password" 

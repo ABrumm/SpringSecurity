@@ -17,6 +17,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.brumma.dao.ContactDaoI;
 import com.brumma.model.Contact;
@@ -42,6 +43,7 @@ public class InitialBean implements Serializable {
 	
 	@PostConstruct
 	public void initMethod() {
+		
 		currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		this.user = new Contact();
 		setUserList(contactService.getuserList());
