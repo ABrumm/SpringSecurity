@@ -15,7 +15,7 @@
 	<context:annotation-config/>
 
 
-	<bean id="hibernateUtil" class="com.brumma.util.HibernateUtil" scope="singleton"/>
+	<bean id="hibernateUtil" class="com.brumma.util.HibernateUtil"/>
 		
 	<bean id="contactService" class="com.brumma.dao.impl.ContactDao"/>
 	

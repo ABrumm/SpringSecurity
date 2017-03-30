@@ -9,17 +9,16 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class LoginManager {
+import org.springframework.security.core.context.SecurityContextHolder;
 
-	public String doLogin() {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("j_spring_security_check");
-		try {
-			dispatcher.forward((ServletRequest) context.getRequest(), (ServletResponse) context.getResponse());
-		} catch (ServletException | IOException e) {
-			//TODO: Logging Error with Logger
-			System.out.println("Exception in doLogin() ...");
-		}
-		return null;
-	}
+public class LoginManager
+{
+
+    public String doLogin() throws ServletException, IOException
+    {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        RequestDispatcher dispatcher = ( (ServletRequest) context.getRequest() ).getRequestDispatcher( "/j_spring_security_check" );
+        dispatcher.forward( (ServletRequest) context.getRequest(), (ServletResponse) context.getResponse() );
+        return null;
+    }
 }

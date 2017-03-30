@@ -8,40 +8,41 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil
 {
-  private static SessionFactory sessionFactory = createSessionFactory();
-  private static Session session = createSession();
-  
-  public static SessionFactory createSessionFactory()
-  {
-    StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("/hibernate.cfg.xml").build();
-    try
+    private static SessionFactory sessionFactory = createSessionFactory();
+
+    private static Session session = createSession();
+
+    public static SessionFactory createSessionFactory()
     {
-      sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure( "/hibernate.cfg.xml" ).build();
+        try
+        {
+            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+        }
+        catch ( Exception e )
+        {
+            StandardServiceRegistryBuilder.destroy( registry );
+        }
+        return sessionFactory;
     }
-    catch (Exception e)
+
+    public SessionFactory getSessionFactory()
     {
-      StandardServiceRegistryBuilder.destroy(registry);
+        return sessionFactory;
     }
-    return sessionFactory;
-  }
-  
-  public SessionFactory getSessionFactory()
-  {
-    return sessionFactory;
-  }
-  
-  public static Session createSession()
-  {
-    return sessionFactory.openSession();
-  }
-  
-  public static Session getSession()
-  {
-    return session;
-  }
-  
-  public static void shutdown()
-  {
-    sessionFactory.close();
-  }
+
+    public static Session createSession()
+    {
+        return sessionFactory.openSession();
+    }
+
+    public static Session getSession()
+    {
+        return session;
+    }
+
+    public static void shutdown()
+    {
+        sessionFactory.close();
+    }
 }

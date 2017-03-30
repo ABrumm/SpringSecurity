@@ -48,7 +48,7 @@
 		</div>
 
 		<div class="loginBtn">
-			<p:commandButton action="#{loginManager.doLogin()}"
+			<p:commandButton type="submit" ajax="false" action="#{loginManager.doLogin()}"
 				value="#{msg.loginBtn}" />
 		</div>
 	</h:form>

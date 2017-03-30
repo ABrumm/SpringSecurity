@@ -2,57 +2,68 @@ package com.brumma.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User implements Serializable
+{
 
-	private static final long serialVersionUID = -3831222815922769460L;
-	
-	private int userId;
+    private static final long serialVersionUID = -3831222815922769460L;
 
-	private String userName;
+    private int userId;
 
-	private String userMail;
+    private String userName;
 
-	private String userPassword;
+    private String userMail;
 
-	private String userActive;
+    private String userPassword;
 
-	public String getUserName() {
-		return userName;
-	}
+    private String userActive;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getUserName()
+    {
+        return userName;
+    }
 
-	public String getUserMail() {
-		return userMail;
-	}
+    public void setUserName( String userName )
+    {
+        this.userName = userName;
+    }
 
-	public void setUserMail(String userMail) {
-		this.userMail = userMail;
-	}
+    public String getUserMail()
+    {
+        return userMail;
+    }
 
-	public String getUserPassword() {
-		return userPassword;
-	}
+    public void setUserMail( String userMail )
+    {
+        this.userMail = userMail;
+    }
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
+    public String getUserPassword()
+    {
+        return userPassword;
+    }
 
-	public String getUserActive() {
-		return userActive;
-	}
+    public void setUserPassword( String userPassword )
+    {
+        this.userPassword = userPassword;
+    }
 
-	public void setUserActive(String userActive) {
-		this.userActive = userActive;
-	}
+    public String getUserActive()
+    {
+        return userActive;
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    public void setUserActive( String userActive )
+    {
+        this.userActive = userActive;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public int getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId( int userId )
+    {
+        this.userId = userId;
+    }
 }

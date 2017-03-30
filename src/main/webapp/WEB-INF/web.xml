@@ -22,6 +22,10 @@
 	<welcome-file-list>
 		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<session-config>
+		<session-timeout>5</session-timeout>
+	</session-config>
 
 
 	<!-- Spring ConfigLocation -->

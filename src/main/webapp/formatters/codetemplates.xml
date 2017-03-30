@@ -10,14 +10,14 @@
  */</template><template autoinsert="false" context="filecomment_context" deleted="false" description="Comment for created Java files" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/*
  * Erstellt am ${date} von ${user}
  *
- * Copyright © ${year} IZLBW
+ * Copyright © ${year}
  */</template><template autoinsert="false" context="typecomment_context" deleted="false" description="Comment for created types" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.typecomment" name="typecomment">/**
  * &lt;strong&gt;&lt;u&gt;Projekt:&lt;/u&gt; ${project_name}&lt;/strong&gt;&lt;br /&gt;
  * &lt;strong&gt;&lt;u&gt;Klasse:&lt;/u&gt; ${package_name}.${type_name}&lt;/strong&gt;&lt;br /&gt;
  *
  * &lt;hr noshade /&gt;
  * &lt;strong&gt;&lt;u&gt;Beschreibung:&lt;/u&gt;&lt;/strong&gt;&lt;br /&gt;
- * Beispiel-Klasse fuer die IZLBW Code Conventions
+ * Beispiel-Klasse fuer die Code Conventions
  * &lt;br /&gt;
  * &lt;hr noshade /&gt;
  * &lt;strong&gt;&lt;u&gt;Historie:&lt;/u&gt;&lt;/strong&gt;&lt;br /&gt;
