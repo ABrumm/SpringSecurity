@@ -11,7 +11,7 @@ public interface ContactDaoI
      * 
      * @return
      */
-    public ArrayList<Contact> getuserList();
+    public ArrayList<Contact> getuserList( int p_userIdentity );
 
     /**
      * TODO: generate description

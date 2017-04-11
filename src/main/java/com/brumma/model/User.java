@@ -1,6 +1,7 @@
 package com.brumma.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class User implements Serializable
 {
@@ -16,7 +17,7 @@ public class User implements Serializable
     private String userPassword;
 
     private String userActive;
-
+    
     public String getUserName()
     {
         return userName;

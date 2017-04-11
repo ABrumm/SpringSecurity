@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -17,21 +18,22 @@ import javax.xml.bind.Unmarshaller;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.brumma.dao.ContactDaoI;
+import com.brumma.dao.UserDaoI;
 import com.brumma.model.Contact;
 import com.brumma.model.Contacts;
+import com.brumma.security.DemoAuthenticationDetails;
 
 /**
  * 
  * <strong><u>Project:</u> demo</strong><br />
  * <strong><u>Class:</u> com.brumma.common.InitialBean</strong><br />
  *
- * <hr noshade />
- * <strong><u>Description:</u></strong><br />
- * Initialbean for index.xhtml
- * <br />
+ * <hr noshade /> <strong><u>Description:</u></strong><br />
+ * Initialbean for index.xhtml <br />
  * <hr noshade />
  *
  * @author Artur Brumm
@@ -49,9 +51,16 @@ public class InitialBean implements Serializable
 
     private ContactDaoI contactService;
 
+    private UserDaoI userService;
+
     private static Iterator<Locale> availableLocalesIT;
 
     private static Map<String, Locale> availableLocalesMap = new LinkedHashMap<String, Locale>();
+    
+    final Authentication l_authentication = SecurityContextHolder.getContext().getAuthentication();
+    
+    final DemoAuthenticationDetails l_details = (DemoAuthenticationDetails) l_authentication.getDetails();
+    
 
     static
     {
@@ -70,11 +79,16 @@ public class InitialBean implements Serializable
      * This method gets currentLocale of User and generating contactList of User
      */
     @PostConstruct
-    public void initMethod()
+    public void init()
     {
         currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         this.user = new Contact();
-        setUserList( contactService.getuserList() );
+        setUserList( contactService.getuserList( userService.getUserIdentity( l_details ) ) );
+    }
+
+    public void initLocale()
+    {
+        FacesContext.getCurrentInstance().getViewRoot().setLocale( this.currentLocale );
     }
 
     /**
@@ -94,17 +108,21 @@ public class InitialBean implements Serializable
      */
     public void saveNewUser()
     {
+        this.user.setUser( l_details.getLoggedUser() );
         if ( contactService.saveUser( this.user ) )
         {
             this.userList.add( this.user );
         }
+        this.user = new Contact();
     }
 
     /**
      * 
      * deleteUser<br />
      * Deletes a selected user from contactList and persistence layer
-     * @param Contact p_contact
+     * 
+     * @param Contact
+     *            p_contact
      */
     public void deleteUser( Contact p_contact )
     {
@@ -116,7 +134,9 @@ public class InitialBean implements Serializable
      * 
      * updateUser<br />
      * Updates a selected user from contactList and persistence layer
-     * @param Contact p_contact
+     * 
+     * @param Contact
+     *            p_contact
      */
     public void updateUser( Contact p_contact )
     {
@@ -139,7 +159,9 @@ public class InitialBean implements Serializable
      * 
      * handleFileUpload<br />
      * Converting XML File upload with contacts to contactList and persistence layer
-     * @param FileUploadEvent event
+     * 
+     * @param FileUploadEvent
+     *            event
      */
     public void handleFileUpload( FileUploadEvent event )
     {
@@ -172,6 +194,7 @@ public class InitialBean implements Serializable
      * 
      * getUser<br />
      * Getter for user object
+     * 
      * @return Contact user
      */
     public Contact getUser()
@@ -183,7 +206,9 @@ public class InitialBean implements Serializable
      * 
      * setUser<br />
      * Setter for user object
-     * @param Contact p_contact
+     * 
+     * @param Contact
+     *            p_contact
      */
     public void setUser( Contact p_contact )
     {
@@ -194,6 +219,7 @@ public class InitialBean implements Serializable
      * 
      * getUserList<br />
      * Getter for userList
+     * 
      * @return ArrayList<User> userList
      */
     public ArrayList<Contact> getUserList()
@@ -205,7 +231,9 @@ public class InitialBean implements Serializable
      * 
      * setUserList<br />
      * Setter for userList
-     * @param ArrayList<User> userList
+     * 
+     * @param ArrayList<User>
+     *            userList
      */
     public void setUserList( ArrayList<Contact> userList )
     {
@@ -216,7 +244,9 @@ public class InitialBean implements Serializable
      * 
      * setContactService<br />
      * Setter for contactService
-     * @param ContactDaoI p_contactService
+     * 
+     * @param ContactDaoI
+     *            p_contactService
      */
     public void setContactService( ContactDaoI p_contactService )
     {
@@ -227,6 +257,7 @@ public class InitialBean implements Serializable
      * 
      * getCurrentLocale<br />
      * Getter for currentLocale
+     * 
      * @return Locale currentLocale
      */
     public Locale getCurrentLocale()
@@ -238,7 +269,9 @@ public class InitialBean implements Serializable
      * 
      * setCurrentLocale<br />
      * Setter for currentLocale
-     * @param Locale p_currentLocale
+     * 
+     * @param Locale
+     *            p_currentLocale
      */
     public void setCurrentLocale( String p_currentLocale )
     {
@@ -255,10 +288,16 @@ public class InitialBean implements Serializable
      * 
      * getAvailableLocalesMap<br />
      * Getter for availableLocales
-     * @return  Map<String,Locale> availableLocalesMap
+     * 
+     * @return Map<String,Locale> availableLocalesMap
      */
     public Map<String, Locale> getAvailableLocalesMap()
     {
         return availableLocalesMap;
+    }
+
+    public void setUserService( UserDaoI userService )
+    {
+        this.userService = userService;
     }
 }

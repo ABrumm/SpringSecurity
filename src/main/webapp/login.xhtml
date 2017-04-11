@@ -13,25 +13,12 @@
 </h:head>
 <h:body>
 
-
-
 	<h:form id="loginForm" prependId="false" styleClass="loginForm">
-		<div class="languageSelect">
-			<p:commandLink action="#{initialBean.setCurrentLocale('de')}"
-				update="@form">
-				<h:graphicImage id="selectGerman" value="images/german.png" />
-			</p:commandLink>
-
-			<p:commandLink action="#{initialBean.setCurrentLocale('en')}"
-				update="@form">
-				<h:graphicImage id="selectEnglish" value="images/english.png" />
-			</p:commandLink>
-		</div>
 
 		<!-- Inputfields for login -->
 		<div>
 			<div class="loginLabel">
-				<h:outputLabel for="username" value="#{msg.loginUser}: " />
+				<h:outputLabel for="username" value="Benutzername: " />
 			</div>
 			<div class="loginInput">
 				<p:inputText id="username" required="true" />
@@ -40,7 +27,7 @@
 
 		<div>
 			<div class="loginLabel">
-				<h:outputLabel for="password" value="#{msg.loginPassword}: " />
+				<h:outputLabel for="password" value="Password: " />
 			</div>
 			<div class="loginInput">
 				<p:password id="password" required="true" />
@@ -49,7 +36,7 @@
 
 		<div class="loginBtn">
 			<p:commandButton type="submit" ajax="false" action="#{loginManager.doLogin()}"
-				value="#{msg.loginBtn}" />
+				value="Anmelden" />
 		</div>
 	</h:form>
 

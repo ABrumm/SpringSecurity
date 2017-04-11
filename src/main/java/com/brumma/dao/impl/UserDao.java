@@ -3,11 +3,15 @@ package com.brumma.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.brumma.dao.UserDaoI;
 import com.brumma.model.Contact;
 import com.brumma.model.User;
+import com.brumma.security.DemoAuthenticationDetails;
 import com.brumma.util.HibernateUtil;
 
 public class UserDao implements UserDaoI
@@ -17,13 +21,14 @@ public class UserDao implements UserDaoI
     public ArrayList<User> getPrincipal( String p_principal, String p_credential )
     {
         List<?> l_principalList = new ArrayList<User>();
-
-        HibernateUtil.getSession().beginTransaction();
-        Query<?> sqlQuery = HibernateUtil.getSession().createQuery( "FROM User WHERE userName  = :param1 AND userPassword = :param2" );
+        Session l_session = HibernateUtil.getSession();
+        l_session.beginTransaction();
+        Query<?> sqlQuery = l_session.createQuery( "FROM User WHERE userName  = :param1 AND userPassword = :param2" );
         sqlQuery.setParameter( "param1", p_principal );
         sqlQuery.setParameter( "param2", p_credential );
         l_principalList = sqlQuery.getResultList();
-        HibernateUtil.getSession().getTransaction().commit();
+        l_session.getTransaction().commit();
+        l_session.close();
         return (ArrayList<User>) l_principalList;
     }
 
@@ -31,6 +36,26 @@ public class UserDao implements UserDaoI
     public void authenticatePrincipal( String userName )
     {
         // TODO Auto-generated method stub
+
+    }
+
+    public int getUserIdentity( DemoAuthenticationDetails p_authenticationDetails )
+    {
+        
+        List<?> l_userList = new ArrayList<User>();
+        Session l_session = HibernateUtil.getSession();
+        l_session.beginTransaction();
+        Query<?> sqlQuery = l_session.createQuery( "FROM User WHERE userName  = :param1 AND userPassword = :param2" );
+        sqlQuery.setParameter( "param1", p_authenticationDetails.getUserName() );
+        sqlQuery.setParameter( "param2", p_authenticationDetails.getUserPW() );
+        l_userList = sqlQuery.getResultList();
+        l_session.getTransaction().commit();
+        l_session.close();
+        
+        p_authenticationDetails.setUserIdentity(  ((User) l_userList.get( 0 )).getUserId() );
+        p_authenticationDetails.setLoggedUser( (User) l_userList.get( 0 ));
+        
+        return ((User) l_userList.get( 0 )).getUserId();
 
     }
 

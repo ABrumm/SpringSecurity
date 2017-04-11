@@ -10,7 +10,7 @@ public class HibernateUtil
 {
     private static SessionFactory sessionFactory = createSessionFactory();
 
-    private static Session session = createSession();
+    private static Session session;
 
     public static SessionFactory createSessionFactory()
     {
@@ -38,7 +38,7 @@ public class HibernateUtil
 
     public static Session getSession()
     {
-        return session;
+        return createSession();
     }
 
     public static void shutdown()

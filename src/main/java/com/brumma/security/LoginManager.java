@@ -14,10 +14,34 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class LoginManager
 {
 
+    /**
+     * 
+     * doLogin<br />
+     * TODO: Add methoddescription.
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     public String doLogin() throws ServletException, IOException
     {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         RequestDispatcher dispatcher = ( (ServletRequest) context.getRequest() ).getRequestDispatcher( "/j_spring_security_check" );
+        dispatcher.forward( (ServletRequest) context.getRequest(), (ServletResponse) context.getResponse() );
+        return null;
+    }
+    
+    /**
+     * 
+     * doLogout<br />
+     * TODO: Add methoddescription.
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
+    public String doLogout() throws ServletException, IOException 
+    {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        RequestDispatcher dispatcher = ( (ServletRequest) context.getRequest() ).getRequestDispatcher( "/j_spring_security_logout" );
         dispatcher.forward( (ServletRequest) context.getRequest(), (ServletResponse) context.getResponse() );
         return null;
     }

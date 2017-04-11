@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.brumma.model.Contact;
 import com.brumma.model.User;
+import com.brumma.security.DemoAuthenticationDetails;
 
 public interface UserDaoI
 {
@@ -23,6 +24,16 @@ public interface UserDaoI
      */
     public void authenticatePrincipal( String userName );
 
+    /**
+     * 
+     * getUserIdentity<br />
+     * TODO: Add methoddescription.
+     * @param p_principal
+     * @param p_credential
+     * @return
+     */
+    public int getUserIdentity( DemoAuthenticationDetails p_authenticationDetails );
+    
     /**
      * TODO: generate description
      * 

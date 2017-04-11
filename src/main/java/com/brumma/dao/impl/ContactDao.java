@@ -1,7 +1,11 @@
 package com.brumma.dao.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import com.brumma.dao.ContactDaoI;
 import com.brumma.model.Contact;
@@ -9,20 +13,36 @@ import com.brumma.util.HibernateUtil;
 
 public class ContactDao implements ContactDaoI
 {
-
-    public ArrayList<Contact> getuserList()
+    
+    /**
+     * TODO: Methoddescription
+     */
+    public ArrayList<Contact> getuserList( int p_userIdentity )
     {
-        return (ArrayList) HibernateUtil.getSession().createQuery( "FROM Contact" ).getResultList();
+        List<?> l_contactList = new ArrayList<Contact>();
+        Session l_session = HibernateUtil.getSession();
+        l_session.beginTransaction();
+        Query<?> sqlQuery = l_session.createQuery( "FROM Contact WHERE userId = :param1" );
+        sqlQuery.setParameter( "param1", p_userIdentity );
+        l_contactList = sqlQuery.getResultList();
+        l_session.getTransaction().commit();
+        l_session.close();
+        return (ArrayList<Contact>) l_contactList;
     }
 
+    /**
+     * TODO: MethodDescription
+     */
     public boolean saveUser( Contact p_contact )
     {
         if ( ( !p_contact.getFirstname().isEmpty() ) && ( !p_contact.getLastname().isEmpty() ) && ( validatePhone( p_contact.getPhone() ) )
         && ( !p_contact.getEmail().isEmpty() ) && ( validateEmail( p_contact.getEmail() ) ) )
         {
-            HibernateUtil.getSession().beginTransaction();
-            HibernateUtil.getSession().save( p_contact );
-            HibernateUtil.getSession().getTransaction().commit();
+            Session l_session = HibernateUtil.getSession();
+            l_session.beginTransaction();
+            l_session.save( p_contact );
+            l_session.getTransaction().commit();
+            l_session.close();
             return true;
         }
         return false;
@@ -30,9 +50,12 @@ public class ContactDao implements ContactDaoI
 
     public void deleteUser( Contact p_contact )
     {
-        HibernateUtil.getSession().beginTransaction();
-        HibernateUtil.getSession().delete( p_contact );
-        HibernateUtil.getSession().getTransaction().commit();
+        HibernateUtil.createSession();
+        Session l_session = HibernateUtil.getSession();
+        l_session.beginTransaction();
+        l_session.delete( p_contact );
+        l_session.getTransaction().commit();
+        l_session.close();
     }
 
     public boolean updateUser( Contact p_contact )
@@ -40,9 +63,11 @@ public class ContactDao implements ContactDaoI
         if ( ( !p_contact.getFirstname().isEmpty() ) && ( !p_contact.getLastname().isEmpty() ) && ( validatePhone( p_contact.getPhone() ) )
         && ( !p_contact.getEmail().isEmpty() ) && ( validateEmail( p_contact.getEmail() ) ) )
         {
-            HibernateUtil.getSession().beginTransaction();
-            HibernateUtil.getSession().update( p_contact );
-            HibernateUtil.getSession().getTransaction().commit();
+            Session l_session = HibernateUtil.getSession();
+            l_session.beginTransaction();
+            l_session.update( p_contact );
+            l_session.getTransaction().commit();
+            l_session.close();
 
             return true;
         }

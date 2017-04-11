@@ -13,8 +13,28 @@
 </h:head>
 <h:body>
 
+<f:metadata>
+	<f:event listener="#{initialBean.initLocale}" type="preRenderView"></f:event>
+</f:metadata>
+
 	<h:form id="mainForm" nctype="multipart/form-data">
-		
+	<div  style="clear: both;">
+		<div class="logoutBtn" style="display: inline-block;">
+			<p:commandButton action="#{loginManager.doLogout}" value="#{msg.logoutBtn}" />
+		</div>
+		<div class="languageSelect"  style="display: inline-block; float: right;">
+			<p:commandLink action="#{initialBean.setCurrentLocale('de')}"
+				update="@form">
+				<h:graphicImage id="selectGerman" value="images/german.png" />
+			</p:commandLink>
+
+			<p:commandLink action="#{initialBean.setCurrentLocale('en')}"
+				update="@form">
+				<h:graphicImage id="selectEnglish" value="images/english.png" />
+			</p:commandLink>
+		</div>
+	</div>
+
 		<p:dataTable var="user" value="#{initialBean.userList}" rows="10"
 			style="margin: 30px;" paginator="true" paginatorPosition="bottom"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {addUser} {upload}"
@@ -32,15 +52,15 @@
 			</f:facet>
 
 			<f:facet name="{upload}">
-				 <p:fileUpload value="#{fileUploadView.file}"
-				 		fileUploadListener="#{initialBean.handleFileUpload}"
-				 		dragDropSupport="true"
-				 		invalidFileMessage="Sie dürfen nur XML Files hochladen."
-				 		allowTypes="/(\.|\/)(xml)$/"
-				 		skinSimple="true" multiple="false"
-				 		style="margin-top: 5px;" update="mainForm" oncomplete="PF('contactDataTable').filter()">
-				 </p:fileUpload>
-				 	
+				<p:fileUpload value="#{fileUploadView.file}"
+					fileUploadListener="#{initialBean.handleFileUpload}"
+					dragDropSupport="true"
+					invalidFileMessage="Sie dürfen nur XML Files hochladen."
+					allowTypes="/(\.|\/)(xml)$/" skinSimple="true" multiple="false"
+					style="margin-top: 5px;" update="mainForm"
+					oncomplete="PF('contactDataTable').filter()">
+				</p:fileUpload>
+
 			</f:facet>
 
 			<p:column headerText="Vorname" filterBy="#{user.firstname}"
@@ -72,8 +92,7 @@
 			<p:column width="40">
 				<p:commandLink action="#{initialBean.setUser(user)}"
 					update="@form editUserForm" oncomplete="PF('editUserDlg').show();">
-					<p:graphicImage
-						value="/images/edit.png"
+					<p:graphicImage value="/images/edit.png"
 						style="display: block; height: 25px; margin: 0 auto;" />
 				</p:commandLink>
 			</p:column>

@@ -30,6 +30,8 @@ public class Contact implements Serializable
     @XmlElement(name = "phone")
     private String phone;
 
+    private User m_user;
+    
     public Contact()
     {
     }
@@ -101,5 +103,15 @@ public class Contact implements Serializable
     public void setContact_id( int contact_id )
     {
         this.contact_id = contact_id;
+    }
+
+    public User getUser()
+    {
+        return m_user;
+    }
+
+    public void setUser( User m_user )
+    {
+        this.m_user = m_user;
     }
 }

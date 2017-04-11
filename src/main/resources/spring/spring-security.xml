@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -10,14 +9,20 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd">
 
+	<bean id="userService" class="com.brumma.dao.impl.UserDao" />
+
 	<bean id="authenticationDemoProvider" class="com.brumma.security.AuthenticationDemoProvider">
-		<property name="userService" ref="userService"/>
+		<property name="userService" ref="userService" />
 	</bean>
-	
-	<bean id="authenticationDemoSuccessHandler" class="com.brumma.security.AuthenticationDemoSuccessHandler"/>
-	
-	<bean id="accessDeniedHandler" class="com.brumma.security.DemoAccessDeniedHandler"/>
-	
+
+	<bean id="authenticationDemoSuccessHandler" class="com.brumma.security.AuthenticationDemoSuccessHandler" />
+
+	<bean id="accessDeniedHandler" class="com.brumma.security.DemoAccessDeniedHandler" />
+
+	<bean id="demoAuthenticationDetailsSource" class="com.brumma.security.DemoAuthenticationDetailsSource" />
+
+	<bean id="customLogoutSuccessHandler" class="com.brumma.security.CustomLogoutSuccessHandler" />
+
 
 	<security:authentication-manager>
 		<security:authentication-provider
@@ -36,9 +41,13 @@
 		<security:form-login login-page="/login.xhtml"
 			username-parameter="username" password-parameter="password"
 			authentication-success-handler-ref="authenticationDemoSuccessHandler"
-			login-processing-url="/j_spring_security_check"/>
-			
-			<security:access-denied-handler ref="accessDeniedHandler"/>
+			authentication-details-source-ref="demoAuthenticationDetailsSource"
+			login-processing-url="/j_spring_security_check" />
+
+		<security:logout success-handler-ref="customLogoutSuccessHandler"
+						 delete-cookies="JSESSIONID" logout-url="/j_spring_security_logout" />
+
+		<security:access-denied-handler ref="accessDeniedHandler" />
 	</security:http>
 
 </beans>

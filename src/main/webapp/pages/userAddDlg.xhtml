@@ -38,7 +38,7 @@
 			</h:panelGrid>
 		</p:panel>
 
-		<p:commandButton value="Erstellen" process="addUserForm" update="newUserPanel"
+		<p:commandButton value="Erstellen" process="addUserForm" update=":mainForm newUserPanel"
 			action="#{initialBean.saveNewUser()}" oncomplete="if(args &amp;&amp; !args.validationFailed) PF('addUserDlg').hide()" style="float: right;" />
 
 	</p:dialog>

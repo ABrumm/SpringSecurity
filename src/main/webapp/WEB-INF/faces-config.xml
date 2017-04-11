@@ -24,6 +24,10 @@
 			<property-name>contactService</property-name>
 			<value>#{contactService}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>userService</property-name>
+			<value>#{userService}</value>
+		</managed-property>
 	</managed-bean>
 	
 	<managed-bean>

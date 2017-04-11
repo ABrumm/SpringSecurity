@@ -18,7 +18,8 @@
 	<bean id="hibernateUtil" class="com.brumma.util.HibernateUtil"/>
 		
 	<bean id="contactService" class="com.brumma.dao.impl.ContactDao"/>
-	
+
 	<bean id="userService" class="com.brumma.dao.impl.UserDao"/>
+	
 		 
 </beans>
