@@ -37,6 +37,9 @@
 
 		<security:intercept-url pattern="/login.xhtml"
 			access="hasRole('ROLE_ANONYMOUS')" />
+			
+			<security:intercept-url pattern="/test**"
+			access="permitAll" />
 
 		<security:form-login login-page="/login.xhtml"
 			username-parameter="username" password-parameter="password"

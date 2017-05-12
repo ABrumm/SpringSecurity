@@ -49,5 +49,20 @@
     	<property name="userActive" type="string">
     		<column name="userActive" length="50" not-null="true"/>
     	</property>
+    	
+    	<many-to-one name="userRole" column="roleID" class="com.brumma.model.Role" not-null="true" lazy="false"/>
+    	
     </class>
+    
+    <class name="com.brumma.model.Role" table="role">
+    	<id name="roleId" type="java.lang.Integer">
+    		<column name="roleId" unique="true"/>
+    		<generator class="increment"/>
+    	</id>
+    	
+    	<property name="rolename" type="string">
+    		<column name="rolename" length="50"/>
+    	</property>
+    </class>
+    
 </hibernate-mapping>

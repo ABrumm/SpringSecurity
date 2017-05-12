@@ -29,7 +29,7 @@ public class AuthenticationDemoProvider implements AuthenticationProvider
         if ( l_pList.size() > 0 )
         {
             final List<GrantedAuthority> grantedAuths = new ArrayList<>();
-            grantedAuths.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
+            grantedAuths.add( new SimpleGrantedAuthority( l_pList.get( 0 ).getUserRole().getRolename() ) );
             final UserDetails l_principal = new User(l_username, l_password, grantedAuths);
             return new UsernamePasswordAuthenticationToken( l_principal, l_password, grantedAuths );
         } else {            

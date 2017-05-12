@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.brumma.dao.UserDaoI;
 import com.brumma.model.Contact;
