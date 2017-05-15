@@ -18,7 +18,7 @@
 
 	<properties>
 		<jsf.faces>2.2.13</jsf.faces>
-		<compiler.plugin>3.1</compiler.plugin>
+		<compiler.plugin>3.6.1</compiler.plugin>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<junit.version>3.8.1</junit.version>
@@ -35,6 +35,35 @@
 		<finalName>demo</finalName>
 		<plugins>
 			<plugin>
+				<groupId>nl.geodienstencentrum.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>update-stylesheets</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<useCompass>true</useCompass>
+					<resources>
+						<resource>
+							<source>
+								<directory>${basedir}/src/main/scss</directory>
+								<includes>
+									<include>**/*.scss</include>
+								</includes>
+								<excludes />
+							</source>
+							<destination>${project.build.directory}/${project.build.finalName}/styles</destination>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -46,7 +75,33 @@
 				</configuration>
 				<version>${compiler.plugin}</version>
 			</plugin>
-			
+
+			<plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<configuration>
+					<charset>UTF-8</charset>
+					<nosuffix>true</nosuffix>
+					<webappTargetDir>${project.build.directory}/${project.build.finalName}/styles</webappTargetDir>
+				</configuration>
+				<executions>
+					<execution>
+						<id>minify-css</id>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+						<configuration>
+							<webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
+							<cssSourceDir>styles</cssSourceDir>
+							<cssSourceIncludes>
+								<include>*.css</include>
+							</cssSourceIncludes>
+							<skipMerge>true</skipMerge>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -55,6 +110,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 
 	<dependencies>
@@ -218,6 +274,18 @@
 			<version>2.25.1</version>
 		</dependency>
 
+		<!-- SASS Compiler -->
+		<dependency>
+			<groupId>org.jruby</groupId>
+			<artifactId>jruby-complete</artifactId>
+			<version>1.7.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>nl.geodienstencentrum.maven</groupId>
+			<artifactId>sass-maven-plugin</artifactId>
+			<version>2.0-RC1</version>
+		</dependency>
 
 	</dependencies>
 </project>
