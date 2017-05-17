@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
-	version="2.0">
-    <application>
-    	<locale-config>
-    		<supported-locale>de</supported-locale>
-    		<supported-locale>en</supported-locale>
-    	</locale-config>
-    	<resource-bundle>
-    		<base-name>languages.language</base-name>
-    		<var>msg</var>
-    	</resource-bundle>
-    	<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-    </application>
-    
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+ http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+	<application>
+		<locale-config>
+			<supported-locale>de</supported-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>languages.language</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+
 	<managed-bean>
 		<managed-bean-name>initialBean</managed-bean-name>
 		<managed-bean-class>com.brumma.common.InitialBean</managed-bean-class>
@@ -29,11 +29,11 @@
 			<value>#{userService}</value>
 		</managed-property>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>loginManager</managed-bean-name>
 		<managed-bean-class>com.brumma.security.LoginManager</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-	
+
 </faces-config>
