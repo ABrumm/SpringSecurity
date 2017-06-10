@@ -1,0 +1,10 @@
+- Switching from Servlet Container to Applicationserver (Tomcat -> JBoss)
+
+- Logback/SLF4J Integration
+- Webservice with REST/SOAP
+- OAuth with Spring (Facebook/Twitter)
+- Junit Testing/Coverage
+
+- JMeter
+
+-MQ Server/Client Architecture (Apache RabbitMQ)
