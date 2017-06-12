@@ -46,7 +46,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
      */
     protected String determineTargetUrl()
     {
-        return "/demo/login.xhtml";
+        return "/application/login.xhtml";
     }
 
 }

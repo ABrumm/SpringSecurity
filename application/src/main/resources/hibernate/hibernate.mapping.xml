@@ -29,7 +29,6 @@
         </property>
         
         <many-to-one name="user" column="userID" class="com.brumma.model.User" not-null="true"/>
-       
     </class>
     
     <class name="com.brumma.model.User" table="userdata">
@@ -51,7 +50,6 @@
     	</property>
     	
     	<many-to-one name="userRole" column="roleID" class="com.brumma.model.Role" not-null="true" lazy="false"/>
-    	
     </class>
     
     <class name="com.brumma.model.Role" table="role">
