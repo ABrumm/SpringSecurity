@@ -4,7 +4,13 @@
 - Webservice with REST/SOAP
 - OAuth with Spring (Facebook/Twitter)
 - Junit Testing/Coverage
+- Sessionrefresh
 
 - JMeter
 
--MQ Server/Client Architecture (Apache RabbitMQ)
+- MQ Server/Client Architecture (Apache RabbitMQ)
+- Talend
+- SOA / Sopera
+
+- Registrierung/Userverwaltung
+- Multirollen
