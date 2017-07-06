@@ -7,7 +7,7 @@
     <tag-name>label</tag-name>
     <component>
       <resource-id>
-        gkvcomponents/label.xhtml
+        components/label.xhtml
       </resource-id>
     </component>
   </tag>
@@ -15,7 +15,7 @@
     <tag-name>inputText</tag-name>
     <component>
       <resource-id>
-        gkvcomponents/inputText.xhtml
+        components/inputText.xhtml
       </resource-id>
     </component>
   </tag>
@@ -23,7 +23,7 @@
     <tag-name>inputTextarea</tag-name>
     <component>
       <resource-id>
-        gkvcomponents/inputTextarea.xhtml
+        components/inputTextarea.xhtml
       </resource-id>
     </component>
   </tag>
