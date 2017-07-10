@@ -14,27 +14,31 @@
 </h:head>
 <h:body>
 
-<f:metadata>
-	<f:event listener="#{initialBean.initLocale}" type="preRenderView"></f:event>
-</f:metadata>
+	<script type="text/javascript" src="#{resource['js:primefaces-de.js']}" />
+	
+	<f:metadata>
+		<f:event listener="#{initialBean.initLocale}" type="preRenderView"></f:event>
+	</f:metadata>
 
 	<h:form id="mainForm" nctype="multipart/form-data">
-	<div  style="clear: both;">
-		<div class="logoutBtn" style="display: inline-block;">
-			<p:commandButton action="#{loginManager.doLogout}" value="#{msg.logoutBtn}" />
-		</div>
-		<div class="languageSelect"  style="display: inline-block; float: right;">
-			<p:commandLink action="#{initialBean.setCurrentLocale('de')}"
-				update="@form">
-				<h:graphicImage id="selectGerman" value="images/german.png" />
-			</p:commandLink>
+		<div style="clear: both;">
+			<div class="logoutBtn" style="display: inline-block;">
+				<p:commandButton action="#{loginManager.doLogout}"
+					value="#{msg.logoutBtn}" />
+			</div>
+			<div class="languageSelect"
+				style="display: inline-block; float: right;">
+				<p:commandLink action="#{initialBean.setCurrentLocale('de')}"
+					update="@form">
+					<h:graphicImage id="selectGerman" value="images/german.png" />
+				</p:commandLink>
 
-			<p:commandLink action="#{initialBean.setCurrentLocale('en')}"
-				update="@form">
-				<h:graphicImage id="selectEnglish" value="images/english.png" />
-			</p:commandLink>
+				<p:commandLink action="#{initialBean.setCurrentLocale('en')}"
+					update="@form">
+					<h:graphicImage id="selectEnglish" value="images/english.png" />
+				</p:commandLink>
+			</div>
 		</div>
-	</div>
 
 		<p:dataTable var="user" value="#{initialBean.userList}" rows="10"
 			style="margin: 30px;" paginator="true" paginatorPosition="bottom"
